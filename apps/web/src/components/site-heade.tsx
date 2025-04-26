@@ -73,7 +73,7 @@ export function SiteHeader() {
             transition={{ duration: 0.5 }}
           >
             <Link href="/" className="flex items-center space-x-2 group">
-              <Image src={"/logo.png"} height={40} width={40} />
+              <Image src={"/logo.png"} height={40} width={40} alt="logo" />
               <span className="font-extrabold text-lg md:text-xl bg-gradient-to-r from-teal-400 to-purple-500 text-transparent bg-clip-text">
                 Chain Mate
               </span>
@@ -135,7 +135,12 @@ export function SiteHeader() {
                 <div className="flex flex-col h-full">
                   <div className="flex items-center justify-between px-6 py-4 border-b border-teal-400/20">
                     <div className="flex items-center gap-2">
-                      <Image src={"/logo.png"} height={20} width={20} />
+                      <Image
+                        src={"/logo.png"}
+                        height={20}
+                        width={20}
+                        alt="logo"
+                      />
                       <span className="font-extrabold text-lg bg-gradient-to-r from-teal-400 to-purple-500 text-transparent bg-clip-text">
                         Chain Mate
                       </span>

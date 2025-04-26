@@ -88,7 +88,7 @@ export function SiteFooter() {
         >
           <motion.div variants={itemVariants} className="space-y-4">
             <div className="flex items-center gap-2">
-              <Image src={"/logo.png"} height={40} width={40} />
+              <Image src={"/logo.png"} height={40} width={40} alt="logo" />
               <span className="font-extrabold text-xl bg-gradient-to-r from-teal-400 to-purple-500 text-transparent bg-clip-text">
                 Chain Mate
               </span>
@@ -143,13 +143,13 @@ export function SiteFooter() {
             </div>
           </motion.div>
 
-          {footerLinks.map((group, idx) => (
+          {footerLinks.map((group) => (
             <motion.div key={group.title} variants={itemVariants}>
               <h3 className="font-semibold text-sm mb-4 text-teal-400">
                 {group.title}
               </h3>
               <ul className="space-y-3 text-sm">
-                {group.links.map((link, linkIdx) => (
+                {group.links.map((link) => (
                   <li key={link.name}>
                     <motion.div variants={linkVariants} whileHover="hover">
                       <Link
