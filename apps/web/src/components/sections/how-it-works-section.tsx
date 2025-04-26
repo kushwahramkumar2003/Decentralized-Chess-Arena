@@ -66,9 +66,8 @@ export function HowItWorksSection() {
     <section
       id="how-it-works"
       ref={sectionRef}
-      className="py-24 md:py-32 text-white relative overflow-hidden"
+      className=" text-white relative overflow-hidden"
     >
-      {/* Glass background glow effects */}
       <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-teal-400 rounded-full filter blur-3xl opacity-10"></div>
       <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-purple-500 rounded-full filter blur-3xl opacity-10"></div>
 
@@ -79,9 +78,6 @@ export function HowItWorksSection() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
           transition={{ duration: 0.8 }}
         >
-          <span className="inline-block px-4 py-1.5 mb-6 rounded-full text-sm font-medium bg-teal-400/10 text-teal-400 border border-teal-400/20 backdrop-blur-sm">
-            Getting Started
-          </span>
           <h2 className="text-4xl md:text-5xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-purple-500">
             How It Works
           </h2>
@@ -90,9 +86,6 @@ export function HowItWorksSection() {
             steps.
           </p>
         </motion.div>
-
-        {/* Timeline connector - visible on larger screens */}
-        <div className="hidden lg:block absolute left-1/2 top-60 bottom-52 w-0.5 bg-gradient-to-b from-teal-400/50 via-purple-500/50 to-teal-400/50 transform -translate-x-1/2"></div>
 
         <motion.div
           variants={containerVariants}
@@ -108,8 +101,7 @@ export function HowItWorksSection() {
               onMouseEnter={() => setHoveredStep(index)}
               onMouseLeave={() => setHoveredStep(null)}
             >
-              {/* Number indicator for step sequence */}
-              <div className="absolute -top-4 -left-4 w-8 h-8 rounded-full bg-gradient-to-r from-teal-400 to-purple-500 flex items-center justify-center text-white font-bold text-sm z-20 shadow-lg">
+              <div className="absolute -top-4 -left-4 w-8 h-8 rounded-full bg-gradient-to-r flex items-center justify-center text-white font-bold text-sm z-20 shadow-lg border border-teal-600/50 backdrop-blur-sm">
                 {index + 1}
               </div>
 
@@ -129,7 +121,6 @@ export function HowItWorksSection() {
                 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-                {/* Glowing border effect on hover */}
                 {hoveredStep === index && (
                   <motion.div
                     className="absolute inset-0 rounded-2xl"
@@ -145,7 +136,6 @@ export function HowItWorksSection() {
                   />
                 )}
 
-                {/* Card content */}
                 <div className="relative z-10">
                   <motion.div
                     className="relative"
@@ -168,52 +158,38 @@ export function HowItWorksSection() {
                   <p className="text-gray-300 mb-6 text-base">
                     {step.description}
                   </p>
-
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{
-                      opacity: hoveredStep === index ? 1 : 0,
-                      height: hoveredStep === index ? "auto" : 0,
-                    }}
-                    transition={{ duration: 0.4 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="border-t border-teal-400/20 pt-4 mt-2">
-                      <div className="flex items-center space-x-2 mb-3">
-                        <div className="h-1 w-6 bg-gradient-to-r from-teal-400 to-purple-500 rounded-full"></div>
-                        <span className="text-teal-400 font-medium">
-                          Details
-                        </span>
-                      </div>
-                      <p className="text-gray-200 mt-2">{step.details}</p>
-
-                      <motion.div
-                        className="mt-4 text-teal-400 flex items-center group cursor-pointer"
-                        whileHover={{ x: 3 }}
-                        transition={{
-                          type: "spring",
-                          stiffness: 400,
-                          damping: 10,
-                        }}
-                      >
-                        <span className="font-medium text-sm">Learn more</span>
-                        <motion.span
-                          animate={{ x: [0, 5, 0] }}
-                          transition={{
-                            duration: 1.5,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                          }}
-                          className="inline-flex ml-2"
-                        >
-                          <ChevronRight className="h-4 w-4" />
-                        </motion.span>
-                      </motion.div>
+                  <div className="border-t border-teal-400/20 pt-4 mt-2">
+                    <div className="flex items-center space-x-2 mb-3">
+                      <div className="h-1 w-1 bg-gradient-to-r from-teal-400 to-purple-500 rounded-full"></div>
+                      <span className="text-teal-400 font-medium">Details</span>
                     </div>
-                  </motion.div>
+                    <p className="text-gray-200 mt-2">{step.details}</p>
+
+                    <motion.div
+                      className="mt-4 text-teal-400 flex items-center group cursor-pointer"
+                      whileHover={{ x: 3 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 10,
+                      }}
+                    >
+                      <span className="font-medium text-sm">Learn more</span>
+                      <motion.span
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{
+                          duration: 1.5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                        className="inline-flex ml-2"
+                      >
+                        <ChevronRight className="h-4 w-4" />
+                      </motion.span>
+                    </motion.div>
+                  </div>
                 </div>
 
-                {/* Interactive corner accent */}
                 <motion.div
                   className="absolute bottom-0 right-0 w-12 h-12 opacity-30"
                   style={{
@@ -230,35 +206,6 @@ export function HowItWorksSection() {
               </motion.div>
             </motion.div>
           ))}
-        </motion.div>
-
-        <motion.div
-          className="flex justify-center mt-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          <motion.a
-            href="#waitlist"
-            className="relative bg-gray-800/50 border border-teal-400/30 text-white px-8 py-4 rounded-full font-medium flex items-center group overflow-hidden backdrop-blur-sm"
-            whileHover={{ scale: 1.03 }}
-          >
-            <span className="absolute inset-0 bg-gradient-to-r from-teal-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-            <span className="relative flex items-center">
-              Get Started Now
-              <motion.span
-                className="ml-2 inline-flex"
-                animate={{ x: [0, 5, 0] }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <ChevronRight className="h-5 w-5" />
-              </motion.span>
-            </span>
-          </motion.a>
         </motion.div>
       </div>
     </section>

@@ -7,6 +7,7 @@ import { ChevronRight } from "lucide-react";
 import { FaChess } from "react-icons/fa";
 
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 export function HeroSection() {
   const [mounted, setMounted] = useState(false);
@@ -35,9 +36,8 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden py-24 md:py-32 lg:py-40  text-white "
+      className="relative overflow-hidden  text-white py-6"
     >
-      {/* Animated gradient orbs */}
       <motion.div
         className="absolute top-1/4 left-1/4 w-72 h-72 rounded-full bg-gradient-to-r from-teal-400/30 to-purple-500/30 blur-3xl"
         animate={{
@@ -63,7 +63,6 @@ export function HeroSection() {
             transition={{ duration: 0.8 }}
             className="flex items-center justify-center mb-10 relative"
           >
-            {/* Chess icon with animated glow */}
             <div className="relative">
               <motion.div
                 className="absolute inset-0 rounded-full bg-gradient-to-r from-teal-400 to-purple-500 opacity-50"
@@ -107,19 +106,18 @@ export function HeroSection() {
           >
             <Button
               asChild
-              size="lg"
-              className="bg-gradient-to-r from-teal-400 to-purple-500 hover:from-teal-500 hover:to-purple-600 text-white font-semibold px-10 py-7 rounded-full shadow-lg shadow-teal-400/30 transition-all duration-300 hover:shadow-xl hover:shadow-teal-400/40 hover:scale-105"
+              variant="outline"
+              className="border-2 border-purple-400/50 hover:border-purple-400 text-purple-400 bg-gray-900/50 backdrop-blur-lg px-7 py-5 rounded-full hover:bg-gray-800/70 transition-all duration-300 hover:scale-105"
             >
               <Link href="#waitlist" className="flex items-center">
                 Join Waiting List
-                <ChevronRight className="ml-2 h-5 w-5" />
+                <ChevronRight className=" h-5 w-5" />
               </Link>
             </Button>
             <Button
               asChild
-              size="lg"
               variant="outline"
-              className="border-2 border-teal-400/50 hover:border-teal-400 text-teal-400 bg-gray-900/50 backdrop-blur-lg px-10 py-7 rounded-full hover:bg-gray-800/70 transition-all duration-300 hover:scale-105"
+              className="border-2 border-teal-400/50 hover:border-teal-400 text-teal-400 bg-gray-900/50 backdrop-blur-lg px-7 py-5 rounded-full hover:bg-gray-800/70 transition-all duration-300 hover:scale-105"
             >
               <Link href="#features">Explore Features</Link>
             </Button>
@@ -129,15 +127,18 @@ export function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="mt-16 flex gap-6 items-center justify-center"
+            className="mt-10 flex gap-6 items-center justify-center"
           >
             <div className="flex -space-x-4">
               {[1, 2, 3, 4].map((i) => (
                 <div
                   key={i}
-                  className="w-12 h-12 rounded-full border-2 border-gray-800 bg-gray-700 flex items-center justify-center overflow-hidden"
+                  className="w-12 h-12 rounded-full  flex items-center justify-center overflow-hidden"
                 >
-                  <div className="w-full h-full bg-gradient-to-br from-teal-400/50 to-purple-500/50" />
+                  <Avatar>
+                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
                 </div>
               ))}
             </div>
@@ -149,14 +150,13 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Decorative chess icon */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
         animate={{ opacity: 0.1, scale: 1, rotate: 0 }}
         transition={{ duration: 1.5, delay: 0.5 }}
         className="absolute right-0 bottom-0 -z-10"
       >
-        <FaChess size={450} className="text-teal-400/20" />
+        <FaChess size={450} className="text-teal-300/20" />
       </motion.div>
     </section>
   );

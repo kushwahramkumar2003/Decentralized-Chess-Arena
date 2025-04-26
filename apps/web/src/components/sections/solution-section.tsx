@@ -2,14 +2,7 @@
 
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import {
-  Network,
-  Coins,
-  Trophy,
-  CheckCircle,
-  ArrowRight,
-  ChevronRight,
-} from "lucide-react";
+import { Network, Coins, Trophy, CheckCircle, ArrowRight } from "lucide-react";
 
 export function SolutionSection() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -79,7 +72,6 @@ export function SolutionSection() {
       ref={sectionRef}
       className="py-24 md:py-32 text-white relative overflow-hidden"
     >
-      {/* Glass background glow effects */}
       <div className="absolute top-1/4 right-0 w-72 h-72 bg-teal-400 rounded-full filter blur-3xl opacity-10"></div>
       <div className="absolute bottom-1/4 -left-20 w-80 h-80 bg-purple-500 rounded-full filter blur-3xl opacity-10"></div>
 
@@ -90,9 +82,6 @@ export function SolutionSection() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
           transition={{ duration: 0.8 }}
         >
-          <span className="inline-block px-4 py-1.5 mb-6 rounded-full text-sm font-medium bg-teal-400/10 text-teal-400 border border-teal-400/20 backdrop-blur-sm">
-            Our Approach
-          </span>
           <h2 className="text-4xl md:text-5xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-purple-500">
             Blockchain-Powered Solutions
           </h2>
@@ -132,7 +121,6 @@ export function SolutionSection() {
                 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-                {/* Glowing border effect on hover */}
                 {hoveredCard === index && (
                   <motion.div
                     className="absolute inset-0 rounded-2xl"
@@ -148,7 +136,6 @@ export function SolutionSection() {
                   />
                 )}
 
-                {/* Card content */}
                 <div className="relative z-10">
                   <motion.div
                     className="relative"
@@ -171,67 +158,54 @@ export function SolutionSection() {
                   <p className="text-gray-300 mb-6 text-base">
                     {solution.description}
                   </p>
-
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{
-                      opacity: hoveredCard === index ? 1 : 0,
-                      height: hoveredCard === index ? "auto" : 0,
-                    }}
-                    transition={{ duration: 0.4 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="border-t border-teal-400/20 pt-4 mt-2">
-                      <div className="flex items-center space-x-2 mb-3">
-                        <div className="h-1 w-6 bg-gradient-to-r from-teal-400 to-purple-500 rounded-full"></div>
-                        <span className="text-teal-400 font-medium">
-                          Key Features
-                        </span>
-                      </div>
-                      <ul className="space-y-3 mt-3">
-                        {solution.features.map((feature, i) => (
-                          <motion.li
-                            key={i}
-                            className="flex items-center text-gray-300"
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.1 + i * 0.1 }}
-                          >
-                            <div className="mr-3 p-1 rounded-full bg-teal-400/10 flex items-center justify-center">
-                              <CheckCircle className="h-4 w-4 text-teal-400" />
-                            </div>
-                            {feature}
-                          </motion.li>
-                        ))}
-                      </ul>
-
-                      <motion.div
-                        className="mt-5 text-teal-400 flex items-center group cursor-pointer"
-                        whileHover={{ x: 3 }}
-                        transition={{
-                          type: "spring",
-                          stiffness: 400,
-                          damping: 10,
-                        }}
-                      >
-                        <span className="font-medium">Learn more</span>
-                        <motion.span
-                          animate={{ x: [0, 5, 0] }}
-                          transition={{
-                            duration: 1.5,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                          }}
-                          className="inline-flex ml-2"
-                        >
-                          <ArrowRight className="h-4 w-4" />
-                        </motion.span>
-                      </motion.div>
+                  <div className="border-t border-teal-400/20 pt-4 mt-2">
+                    <div className="flex items-center space-x-2 mb-3">
+                      <div className="h-1 w-1 bg-gradient-to-r from-teal-400 to-purple-500 rounded-full"></div>
+                      <span className="text-teal-400 font-medium">
+                        Key Features
+                      </span>
                     </div>
-                  </motion.div>
-                </div>
+                    <ul className="space-y-3 mt-3">
+                      {solution.features.map((feature, i) => (
+                        <motion.li
+                          key={i}
+                          className="flex items-center text-gray-300"
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.1 + i * 0.1 }}
+                        >
+                          <div className="mr-3 p-1 rounded-full bg-teal-400/10 flex items-center justify-center">
+                            <CheckCircle className="h-4 w-4 text-teal-400" />
+                          </div>
+                          {feature}
+                        </motion.li>
+                      ))}
+                    </ul>
 
-                {/* Interactive corner accent */}
+                    <motion.div
+                      className="mt-5 text-teal-400 flex items-center group cursor-pointer"
+                      whileHover={{ x: 3 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 10,
+                      }}
+                    >
+                      <span className="font-medium">Learn more</span>
+                      <motion.span
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{
+                          duration: 1.5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                        className="inline-flex ml-2"
+                      >
+                        <ArrowRight className="h-4 w-4" />
+                      </motion.span>
+                    </motion.div>
+                  </div>
+                </div>
                 <motion.div
                   className="absolute bottom-0 right-0 w-12 h-12 opacity-30"
                   style={{
@@ -248,34 +222,6 @@ export function SolutionSection() {
               </motion.div>
             </motion.div>
           ))}
-        </motion.div>
-
-        <motion.div
-          className="flex justify-center mt-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          <motion.button
-            className="relative bg-gray-800/50 border border-teal-400/30 text-white px-8 py-4 rounded-full font-medium flex items-center group overflow-hidden backdrop-blur-sm"
-            whileHover={{ scale: 1.03 }}
-          >
-            <span className="absolute inset-0 bg-gradient-to-r from-teal-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-            <span className="relative flex items-center">
-              Explore Platform Features
-              <motion.span
-                className="ml-2 inline-flex"
-                animate={{ x: [0, 5, 0] }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <ChevronRight className="h-5 w-5" />
-              </motion.span>
-            </span>
-          </motion.button>
         </motion.div>
       </div>
     </section>

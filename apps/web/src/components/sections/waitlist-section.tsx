@@ -14,7 +14,6 @@ export function WaitlistSection() {
   const handleTwitterAuth = async () => {
     setIsSubmitting(true);
 
-    // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     toast.success(
@@ -48,7 +47,6 @@ export function WaitlistSection() {
       ref={sectionRef}
       className="py-24 md:py-32 text-white relative overflow-hidden"
     >
-      {/* Glass background glow effects - matching How It Works section */}
       <div className="absolute top-1/3 right-1/4 w-72 h-72 bg-purple-500 rounded-full filter blur-3xl opacity-10"></div>
       <div className="absolute bottom-1/2 left-1/4 w-80 h-80 bg-teal-400 rounded-full filter blur-3xl opacity-10"></div>
 
@@ -59,9 +57,6 @@ export function WaitlistSection() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
           transition={{ duration: 0.8 }}
         >
-          <span className="inline-block px-4 py-1.5 mb-6 rounded-full text-sm font-medium bg-teal-400/10 text-teal-400 border border-teal-400/20 backdrop-blur-sm">
-            Join Now
-          </span>
           <h2 className="text-4xl md:text-5xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-purple-500">
             Join the Chess Revolution
           </h2>
@@ -71,7 +66,6 @@ export function WaitlistSection() {
           </p>
         </motion.div>
 
-        {/* Main waitlist card with glass effect */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -79,7 +73,6 @@ export function WaitlistSection() {
           className="max-w-3xl mx-auto"
         >
           <div className="relative rounded-2xl overflow-hidden border border-teal-400/30 bg-gray-800/40 backdrop-blur-md">
-            {/* Glowing border effect */}
             <div className="absolute inset-0 bg-gradient-to-br from-teal-400/10 to-purple-500/10"></div>
 
             <div className="relative p-10 md:p-12">
@@ -109,7 +102,7 @@ export function WaitlistSection() {
                 <motion.button
                   onClick={handleTwitterAuth}
                   disabled={isSubmitting}
-                  className="relative bg-gradient-to-r from-teal-500 to-purple-600 text-white px-8 py-4 rounded-full font-medium flex items-center gap-3 group mx-auto overflow-hidden shadow-lg shadow-teal-400/20 hover:shadow-teal-400/30"
+                  className="hover:cursor-pointer relative bg-transparent text-teal-400 border border-teal-400/20 backdrop-blur-sm px-4 py-3 rounded-full font-medium flex items-center gap-3 group mx-auto overflow-hidden shadow-lg shadow-teal-400/20 hover:shadow-teal-400/30"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -131,7 +124,6 @@ export function WaitlistSection() {
                 </motion.button>
               </div>
 
-              {/* Benefits section */}
               <div className="mt-12 pt-8 border-t border-teal-400/20">
                 <h3 className="text-center text-xl font-bold mb-8 text-white">
                   Early access members will receive:
@@ -167,7 +159,6 @@ export function WaitlistSection() {
           </div>
         </motion.div>
 
-        {/* Footer note */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
