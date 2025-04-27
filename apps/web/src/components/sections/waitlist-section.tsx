@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { ChevronRight, Mail } from "lucide-react";
 import { toast } from "sonner";
-import { joinWaitlist } from "@/app/actions/waitlist";
+import { joinWaitlist, getRecentWaitlistUsers } from "@/app/actions/waitlist";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -23,13 +23,28 @@ interface WaitlistUser {
   createdAt: string;
 }
 
-export function WaitlistSection({ users }: { users: WaitlistUser[] }) {
+export function WaitlistSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [recentUsers, setRecentUsers] = useState<WaitlistUser[]>([]);
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const emailInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const fetchRecentUsers = async () => {
+      const users = await getRecentWaitlistUsers();
+      setRecentUsers(
+        users.map((user) => ({
+          ...user,
+          createdAt: user.createdAt.toISOString(),
+        }))
+      );
+    };
+
+    fetchRecentUsers();
+  }, []);
 
   const handleSubmit = async (formData: FormData) => {
     setIsSubmitting(true);
@@ -39,6 +54,14 @@ export function WaitlistSection({ users }: { users: WaitlistUser[] }) {
         setIsWaitlistOpen(false);
 
         setShowSuccessDialog(true);
+
+        const users = await getRecentWaitlistUsers();
+        setRecentUsers(
+          users.map((user) => ({
+            ...user,
+            createdAt: user.createdAt.toISOString(),
+          }))
+        );
       } else {
         toast.error(result.error);
       }
@@ -106,7 +129,7 @@ export function WaitlistSection({ users }: { users: WaitlistUser[] }) {
               <div className="text-center mb-10">
                 <div className="flex items-center justify-center gap-2 text-gray-300 mb-8">
                   <div className="flex -space-x-2">
-                    {users.slice(0, 3).map((user, i) => (
+                    {recentUsers.slice(0, 3).map((user, i) => (
                       <div
                         key={i}
                         className="w-8 h-8 rounded-full bg-gradient-to-r from-teal-500 to-purple-600 flex items-center justify-center text-xs font-bold text-white border-2 border-gray-800"
@@ -114,15 +137,15 @@ export function WaitlistSection({ users }: { users: WaitlistUser[] }) {
                         {user.handle.charAt(0).toUpperCase()}
                       </div>
                     ))}
-                    {users.length > 3 && (
+                    {recentUsers.length > 3 && (
                       <div className="w-8 h-8 rounded-full bg-gray-800 border-2 border-gray-700 flex items-center justify-center text-xs font-medium text-gray-400">
-                        +{users.length - 3}
+                        +{recentUsers.length - 3}
                       </div>
                     )}
                   </div>
                   <span className="ml-2 text-base">
                     <span className="text-teal-400 font-medium">
-                      {users.length.toLocaleString()}
+                      {recentUsers.length.toLocaleString()}
                     </span>{" "}
                     players recently joined
                   </span>

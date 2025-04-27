@@ -7,31 +7,18 @@ import { WaitlistSection } from "@/components/sections/waitlist-section";
 
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-heade";
-import { getRecentWaitlistUsers } from "./actions/waitlist";
-import { WaitlistUser } from "@prisma/client";
 
-interface WaitlistUser2 {
-  handle: string;
-  createdAt: string;
-}
-
-export default async function Home() {
-  const users = (await getRecentWaitlistUsers()) as WaitlistUser[];
-  const formattedUsers: WaitlistUser2[] = users.map((user) => ({
-    ...user,
-    createdAt: user.createdAt.toISOString(),
-  }));
-
+export default function Home() {
   return (
     <div className="relative min-h-screen">
       <Background />
       <SiteHeader />
       <main>
-        <HeroSection users={formattedUsers} />
+        <HeroSection />
         <ProblemSection />
         <SolutionSection />
         <HowItWorksSection />
-        <WaitlistSection users={formattedUsers} />
+        <WaitlistSection />
       </main>
       <SiteFooter />
     </div>
