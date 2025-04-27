@@ -1,5 +1,5 @@
 {
-  "name": "engine",
+  "name": "http",
   "module": "index.ts",
   "type": "module",
   "scripts": {
