@@ -1,84 +1,65 @@
-# Turborepo starter
+# Chain Mate
 
-This Turborepo starter is maintained by the Turborepo core team.
+![Chain Mate Logo](./apps/web/public/logo.png)
 
-## Using this example
+**Chain Mate** is a decentralized chess platform built on the Solana blockchain, reimagining competitive chess with Web3 technology. By integrating DeFi, NFTs, and real-time gameplay, Chain Mate enables players to stake SOL or USDC, compete anonymously, and earn rewards in a fully decentralized environment. With a sleek, Solana-inspired UI featuring teal and purple gradients, glassmorphism, and glowing orbs, Chain Mate offers a futuristic gaming experience that bridges traditional chess with blockchain innovation.
 
-Run the following command:
+## What is Chain Mate?
 
-```sh
-npx create-turbo@latest
-```
+Chain Mate is a decentralized chess arena where players can engage in strategic battles, stake cryptocurrency (SOL or USDC), and collect exclusive NFTs as rewards. Built on Solana for its high-speed and low-cost transactions, the platform allows players to connect their wallets (e.g., Phantom, Solflare) and participate anonymously without requiring personal information. The core vision is to create a trustless, transparent, and rewarding chess ecosystem where skill meets financial incentives, powered by Solana smart contracts (programs) and a WebSocket-driven game engine.
 
-## What's inside?
+## What Problems Does Chain Mate Solve?
 
-This Turborepo includes the following packages/apps:
+Traditional online chess platforms often lack financial incentives, transparency in matchmaking, and ownership of in-game assets. Chain Mate addresses these issues by:
 
-### Apps and Packages
+- **Decentralized Staking**: Players stake SOL or USDC in a Solana program (smart contract) before a match, ensuring both parties have skin in the game. The winner claims the staked amount, minus a small platform fee, with all transactions recorded on-chain for transparency.
+- **Trustless Gameplay**: The game engine, the only centralized component, facilitates real-time communication between players using WebSockets, ensuring smooth gameplay while storing match outcomes in a database for analytics and leaderboards.
+- **Anonymity and Accessibility**: Players connect via Solana wallets, requiring no personal data, making the platform fully anonymous and accessible globally.
+- **Player Ownership**: Exclusive NFTs are awarded for achievements (e.g., winning streaks, beta participation), giving players true ownership of digital collectibles on Solana.
+- **Fair Rewards**: DeFi integration allows players to earn SOL/USDC based on skill, with transparent payout logic enforced by Solana programs.
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+## How It Works
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+Chain Mate operates as a hybrid system combining decentralized finance and real-time gameplay:
 
-### Utilities
+1. **Wallet Connection**: Players connect a Solana wallet (e.g., Phantom) to join the platform anonymously.
+2. **Staking**: Before a match, both players stake an agreed amount of SOL or USDC into a Solana program. The program locks the funds in a trustless escrow until the match concludes.
+3. **Real-Time Gameplay**: The game engine, powered by WebSockets, handles real-time chess moves between players, ensuring low latency and a seamless experience. It communicates match state (e.g., moves, checkmate) to both parties and the database.
+4. **Match Resolution**: Upon match completion, the game engine reports the outcome to the Solana program, which releases the staked funds to the winner (or refunds in case of a draw). Match data (e.g., winner, moves) is stored in a PostgreSQL database via Prisma for leaderboards and analytics.
+5. **NFT Rewards**: Players earn NFTs for milestones (e.g., first win, beta participation), minted on Solana and transferable to marketplaces like Magic Eden.
+6. **Waitlist and Beta**: Early adopters join the waitlist via email (or Twitter/X OAuth in future iterations), gaining beta access, exclusive NFTs, and founder status.
 
-This Turborepo has some additional tools already setup for you:
+## Technical Architecture
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+Chain Mate leverages a robust stack to deliver a decentralized, scalable, and user-friendly experience:
 
-### Build
+- **Frontend**: Built with Next.js 15, Tailwind CSS v4, ShadCN UI, and Framer Motion for a modern, Solana-inspired UI with teal-purple gradients, glassmorphism, and animations.
+- **Backend**: Next.js API routes and server actions handle waitlist submissions and database interactions, with Prisma as the ORM for PostgreSQL.
+- **Solana Programs**: Rust-based smart contracts manage staking, escrow, and payouts for SOL/USDC. The programs ensure trustless execution of match outcomes.
+- **Game Engine**: A Node.js-based game engine uses WebSockets (via Socket.IO) for real-time chess move synchronization between players. It interfaces with the Solana program for match resolution and stores game data in the database.
+- **Database**: PostgreSQL stores waitlist users, match history, and player stats, accessed via Prisma for type-safe queries.
+- **Web3 Integration**: Solana Web3.js and wallet adapters (e.g., @solana/wallet-adapter-react) enable wallet connections and on-chain interactions.
+- **Authentication**: Anonymous wallet-based access, with optional Twitter/X OAuth for waitlist (planned).
 
-To build all apps and packages, run the following command:
+## Key Features
 
-```
-cd my-turborepo
-pnpm build
-```
+- **Decentralized Staking**: Stake SOL/USDC in a Solana program for competitive matches, with transparent payouts.
+- **Real-Time Chess**: WebSocket-driven game engine ensures smooth, low-latency gameplay.
+- **NFT Collectibles**: Earn exclusive NFTs for achievements, tradeable on Solana marketplaces.
+- **Anonymous Access**: Connect with a Solana wallet for fully anonymous participation.
+- **Modern UI**: Solana-inspired design with teal-purple gradients, glassmorphism, and glowing orbs, optimized for web and mobile.
+- **Waitlist Benefits**: Early adopters receive beta access, NFTs, and founder status.
 
-### Develop
+## Roadmap
 
-To develop all apps and packages, run the following command:
+- [x] Launch waitlist and collect early adopters
+- [ ] Deploy Solana programs for staking and payouts
+- [ ] Implement WebSocket-based game engine
+- [ ] Mint initial NFT collection for beta testers
+- [ ] Public beta release
+- [ ] Integrate Twitter/X OAuth for waitlist
+- [ ] Add leaderboards and match history
 
-```
-cd my-turborepo
-pnpm dev
-```
+---
 
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/docs/reference/command-line-reference)
+_Built with ❤️ on Solana_
