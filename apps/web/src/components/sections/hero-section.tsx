@@ -7,9 +7,13 @@ import { ChevronRight } from "lucide-react";
 import { FaChess } from "react-icons/fa";
 
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
-export function HeroSection() {
+interface WaitlistUser {
+  handle: string;
+  createdAt: string;
+}
+
+export function HeroSection({ users }: { users: WaitlistUser[] }) {
   const [mounted, setMounted] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const sectionRef = useRef<HTMLElement>(null);
@@ -129,22 +133,25 @@ export function HeroSection() {
             transition={{ duration: 1, delay: 0.8 }}
             className="mt-10 flex gap-6 items-center justify-center"
           >
-            <div className="flex -space-x-4">
-              {[1, 2, 3, 4].map((i) => (
+            <div className="flex -space-x-3">
+              {users.slice(0, 4).map((user, index) => (
                 <div
-                  key={i}
-                  className="w-12 h-12 rounded-full  flex items-center justify-center overflow-hidden"
+                  key={user.handle}
+                  className="w-10 h-10 rounded-full bg-teal-800 flex items-center justify-center text-sm font-bold text-white border-2 border-gray-800 shadow-lg hover:scale-110 transition-transform duration-200"
+                  style={{ zIndex: 4 - index }}
                 >
-                  <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>CN</AvatarFallback>
-                  </Avatar>
+                  {user.handle.charAt(0).toUpperCase()}
                 </div>
               ))}
+              {users.length > 4 && (
+                <div className="w-10 h-10 rounded-full bg-gray-800 border-2 border-gray-700 flex items-center justify-center text-sm font-medium text-gray-400 shadow-lg">
+                  +{users.length - 4}
+                </div>
+              )}
             </div>
             <p className="text-gray-300 text-sm md:text-base">
-              <span className="text-white font-semibold">600+</span> players
-              already joined
+              <span className="text-white font-semibold">{users.length}</span>{" "}
+              players already joined
             </p>
           </motion.div>
         </div>

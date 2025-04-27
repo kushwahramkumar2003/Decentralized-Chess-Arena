@@ -7,18 +7,25 @@ import { WaitlistSection } from "@/components/sections/waitlist-section";
 
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-heade";
+import { getRecentWaitlistUsers } from "./actions/waitlist";
 
-export default function Home() {
+export default async function Home() {
+  const users = await getRecentWaitlistUsers();
+  const formattedUsers = users.map((user) => ({
+    ...user,
+    createdAt: user.createdAt.toISOString(),
+  }));
+
   return (
     <div className="relative min-h-screen">
       <Background />
       <SiteHeader />
       <main>
-        <HeroSection />
+        <HeroSection users={formattedUsers} />
         <ProblemSection />
         <SolutionSection />
         <HowItWorksSection />
-        <WaitlistSection />
+        <WaitlistSection users={formattedUsers} />
       </main>
       <SiteFooter />
     </div>

@@ -1,0 +1,15 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model WaitlistUser {
+  id        Int      @id @default(autoincrement())
+  handle    String   @unique // Twitter/X handle or email
+  createdAt DateTime @default(now())
+}

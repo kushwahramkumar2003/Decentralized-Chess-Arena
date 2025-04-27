@@ -1,0 +1,16 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model WaitlistUser {
+  id        Int      @id @default(autoincrement())
+  handle    String   @unique // Email address
+  createdAt DateTime @default(now())
+
+  @@index([createdAt(sort: Desc)])
+}
